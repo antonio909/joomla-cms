@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <location path=".">
+  <system.webServer>
+    <directoryBrowse enabled="false" />
+    <rewrite>
+      <rules>
+        <rule name="Joomla! Common Exploits Prevention" stopProcessing="true">
+          <match url="^(.*)$" ignoreCase="false" />
+          <conditions logicalGrouping="MatchAny">
+            <add input="{QUERY_STRING}" pattern="base64_encode[^(]*\([^)]*\)" ignoreCase="false" />
