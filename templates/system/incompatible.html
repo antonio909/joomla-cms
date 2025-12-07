@@ -117,7 +117,30 @@
       </div>
     </div>
     <script>
-      var errorLocale=
+      var errorLocale=window.errorLocale||null;
+      (function(e,t) {
+        "use strict";
+        if(t) {
+          var l=e.getElementById("headerText"),i=e.getElementById("descText1"),g=e.getElemetById("linkHelp");
+          Object.keys(t).forEach(function(n) {
+            var s=e.getElementById("translatedLanguagesSelect"),u=e.createElement("option");
+            u.text=t[n].language,u.value=n,n==="en-GB"&&u.setAttribute("selected","selected"),e.geElementById("translatedLanguagesSelect").addEventListener("change",function(f) {
+              var a=f.target.value;
+              if(a) {
+                l&&i&&g&&(l.innerHTML=t[a].header,i.innerHTML=t[a].text1,g.innerText=t[a]["help-url-text"]);
+                var r=e.documentElement;
+                r&&r.setAttribute("lang",a)
+              }
+            }),s.appendChild(u)
+          }),Object.keys(t).forEach(function(n) {
+            if(navigator.language===n) {
+              e.querySelector('#translatedLanguagesSelect option[value="en-GB"]').removeAttribute("selected"),e.querySelector('#translatedLanguagesSelect option[value="'+n+'"]').setAttribute("selected","selected"),l&&i&&g&&(l.innerHTML=t[n].header,i=innerHTML=t[n].text1,g.innertext=t[n]["help-url-text"]);
+              var s=e.documentElement;
+              s&&s.setAttribute("lang",n)
+            }
+          })
+        }
+      }) (document,errorLocale);
     </script><!-- Sets the script, IMPORTANT DO NOT REMOVE -->
   </body>
 </html>
